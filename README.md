@@ -4,6 +4,8 @@
 ### Descripción
 El repositorio implementa **Chirper**,  una aplicación de ejemplo desarrollada en [Laravel Bootcamp 11.x](https://laravel.com/docs/11.x).
 
+Notar que el enlace [https://bootcamp.laravel.com/](https://bootcamp.laravel.com/) ha sido actualizado con la versión 12.x de Laravel.
+
 Entre otras funcionalidades permite:
 
 - registrar nuevos usuarios.
