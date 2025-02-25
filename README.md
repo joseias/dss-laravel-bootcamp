@@ -90,7 +90,7 @@ si fallara, probar `rm -rf node_modules` y reintentar.
 
   
 
-(4) configurar .env si fuera necesario (base de datos, etc.)
+(4) configurar .env si fuera necesario (base de datos, key, etc.)
 
   
 
