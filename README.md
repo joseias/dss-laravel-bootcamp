@@ -1,66 +1,79 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+## Chirper
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+  
+### Descripción
+El repositorio implementa **Chirper**,  una aplicación de ejemplo desarrollada en [Laravel Bootcamp 11.x](https://laravel.com/docs/11.x).
 
-## About Laravel
+Entre otras funcionalidades permite:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- registrar nuevos usuarios.
+- editar los datos del perfil.
+- crear, editar o borrar chirps.
+- notificar a los usuarios sobre nuevos chirps. Se simula envío de correo electrónico escribiendo a archivo de logs **storage/logs/mail.log**
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Se sugiere revisar migraciones, seeders, modelos, rutas, vistas, configuración de correo y logging, eventos, notificaciones y politicas entre otros.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Pasos para replicar
 
-## Learning Laravel
+Los siguientes pasos permiten ambientar el proyecto en Ubuntu 24.04
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+(1) instalar node y npm:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- ver dockerfile para instrucciones de instalación en Linux.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+(2) instalar dependencias Laravel. Navegar a la carpeta del proyecto:
 
-## Laravel Sponsors
+`composer install`
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Los pasos 2.1 y 2.2 no son necesarios ya que el archivo **package.json** ya contiene las dependencias, entre ellas Laravel Breeze.  
 
-### Premium Partners
+(2.1) añadir e instalar Breeze:
+`composer require  laravel/breeze:2.3.3  --dev`
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+(2.1) instalar Blade:
 
-## Contributing
+`php artisan breeze:install blade`
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+este comando creará varias elementos, incluidas vistas por defecto de la aplicación. Se recomienda reescribirlas con los archivos provistos.
 
-## Code of Conduct
+(3) instalar dependencias de node.js:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+`npm install`
 
-## Security Vulnerabilities
+si fallara, probar `rm  -rf node_modules` y reintentar.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+(4) configurar .env si fuera necesario (base de datos, etc.)
 
-## License
+(5) lanzar migraciones y seeders:
+ 
+`php artisan migrate`
+`php artisan db:seed`
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+en la BD debería existir un usuario con email: jane@does.com y contraseña: dss123 que se puede utilizar para iniciar sesión.
+
+
+(6) lanzar gestor de colas, servidor vite, etc. 
+
+- lanzar los comandos desde dentro de la carpeta del proyecto.
+- se recomienda utilizar una terminal diferente para cada comando.
+
+(6.1) lanzar gestor de colas:
+
+`php artisan queue:work`
+
+se utiliza para notificaciones, ver descripción de la aplicación.
+
+(6.2) lanzar vite:
+
+`npm run dev`
+
+se utiliza para gestionar distribución de JavaScript, CSS, imágenes, etc.
+
+(6.3) lanzar servidor:
+
+`php artisan serve`
+
+Si se está utilizando docker puede ser necesario añadir opción `--host 0.0.0.0`
+
+(7) Navegar al URL de la aplicación.
+
