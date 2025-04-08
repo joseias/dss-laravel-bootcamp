@@ -26,14 +26,24 @@ class ChirperSeeder extends Seeder
 
             $chirps = array();
 
-            $total = random_int(min: 1, max: 3);
+            $total = random_int(min: 0, max: 10);
 
             for ($i = 0; $i < $total; $i++) {
+                $user_id = $user->id;
+                $message = fake()->realTextBetween(minNbChars: 5, maxNbChars: 200);
+                $created_at = fake()->dateTimeBetween('-1 week', '+1 week');
+                $updated_at = $created_at;
+
+                // randomly set updated_at
+                if (random_int(min: 0, max: 1) == 1){
+                    $updated_at = fake()->dateTimeBetween($created_at, '+1 week');
+                }
+
                 $chirp = [
-                    'user_id' => $user->id,
-                    'message' => fake()->realTextBetween(minNbChars: 5, maxNbChars: 10),
-                    'created_at' => fake()->date(),
-                    'updated_at' => fake()->date(),
+                    'user_id' => $user_id,
+                    'message' => $message,
+                    'created_at' => $created_at,
+                    'updated_at' => $updated_at
                 ];
 
                 $chirps[] = $chirp;
