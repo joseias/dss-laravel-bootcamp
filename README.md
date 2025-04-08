@@ -56,7 +56,7 @@ Los siguientes pasos permiten ambientar el proyecto en Ubuntu 24.04
 
   
 
-Los pasos 2.1 y 2.2 no son necesarios ya que el archivo **package.json** ya contiene las dependencias, entre ellas Laravel Breeze.
+Los pasos 2.1 y 2.2 no son necesarios ya que el archivo **composer.json** ya contiene las dependencias, entre ellas Laravel Breeze.
 
   
 
